@@ -8,7 +8,7 @@ import '@nomiclabs/hardhat-ethers';
 import '@nomiclabs/hardhat-etherscan';
 import '@nomiclabs/hardhat-waffle';
 
-import {nodeUrl, accounts, addForkConfiguration} from './utils/network';
+import {nodeUrl, accounts, addForkConfiguration, nodeHeaders} from './utils/network';
 
 dotenv.config();
 
@@ -113,6 +113,17 @@ const config: HardhatUserConfig = {
       url: nodeUrl('artio'),
       accounts: accounts('artio'),
       saveDeployments: true,
+    },
+    cartio: {
+      url: nodeUrl('cartio'),
+      accounts: accounts('cartio'),
+      saveDeployments: true,
+    },
+    berachain: {
+      url: nodeUrl('berachain'),
+      accounts: accounts('berachain'),
+      saveDeployments: true,
+      httpHeaders: nodeHeaders('berachain')
     }
   }),
   paths: {

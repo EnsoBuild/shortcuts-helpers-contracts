@@ -28,6 +28,19 @@ export function nodeUrl(networkName: string): string {
   return uri;
 }
 
+export function nodeHeaders(networkName: string): HttpNetworkUserConfig["httpHeaders"] | undefined {
+  if (networkName) {
+    const authToken = process.env['AUTH_TOKEN_' + networkName.toUpperCase()];
+    if (authToken && authToken !== '') {
+      return {
+        "Authorization": `Bearer ${authToken}`
+      }
+    }
+  }
+
+  return undefined;
+}
+
 export function getMnemonic(networkName?: string): string {
   if (networkName) {
     const mnemonic = process.env['MNEMONIC_' + networkName.toUpperCase()];
