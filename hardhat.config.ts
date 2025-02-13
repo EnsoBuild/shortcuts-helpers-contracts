@@ -124,6 +124,11 @@ const config: HardhatUserConfig = {
       accounts: accounts('berachain'),
       saveDeployments: true,
       httpHeaders: nodeHeaders('berachain')
+    },
+    sonic: {
+      url: nodeUrl('sonic'),
+      accounts: accounts('sonic'),
+      saveDeployments: true,
     }
   }),
   paths: {
