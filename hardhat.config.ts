@@ -129,6 +129,11 @@ const config: HardhatUserConfig = {
       url: nodeUrl('sonic'),
       accounts: accounts('sonic'),
       saveDeployments: true,
+    },
+    hyper: {
+      url: nodeUrl('hyper'),
+      accounts: accounts('hyper'),
+      saveDeployments: true,
     }
   }),
   paths: {
