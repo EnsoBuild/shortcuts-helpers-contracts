@@ -67,7 +67,17 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   });
 
   await deployDecimalHelpers();
-  
+
+  const {deploy: deployUniswapV4Helpers} = await deterministic('UniswapV4Helpers', {
+    from: deployer,
+    args: [],
+    log: true,
+    autoMine: true,
+    skipIfAlreadyDeployed: true,
+  });
+
+  await deployUniswapV4Helpers();
+
   const {deploy: deploySwapHelpers} = await deterministic('SwapHelpers', {
     from: deployer,
     args: [],
