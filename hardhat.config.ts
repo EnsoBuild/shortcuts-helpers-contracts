@@ -26,7 +26,7 @@ const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
-        version: '0.8.23',
+        version: '0.8.24',
         settings: {
           optimizer: {
             enabled: true,
@@ -37,7 +37,6 @@ const config: HardhatUserConfig = {
       oldCompiler,
     ],
     overrides: {
-      'contracts/UniswapV4Helpers.sol': oldCompiler,
       'contracts/BalancerHelpers.sol': oldCompiler,
       'contracts/DecimalHelpers.sol': oldCompiler,
       'contracts/EnsoShortcutsHelpers.sol': oldCompiler,

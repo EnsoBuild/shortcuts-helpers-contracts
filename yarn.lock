@@ -1846,6 +1846,14 @@
   resolved "https://registry.yarnpkg.com/@ungap/promise-all-settled/-/promise-all-settled-1.1.2.tgz#aa58042711d6e3275dd37dc597e5d31e8c290a44"
   integrity sha512-sL/cEvJWAnClXw0wHk85/2L0G6Sj8UB0Ctc1TEMbKSsmpRosqhwj9gWgFRZSrBr2f9tiXISwNhCPmlfqUqyb9Q==
 
+"@uniswap/v4-core@github:uniswap/v4-core":
+  version "1.0.1"
+  resolved "https://codeload.github.com/uniswap/v4-core/tar.gz/80311e34080fee64b6fc6c916e9a51a437d0e482"
+
+"@uniswap/v4-periphery@github:Uniswap/v4-periphery":
+  version "1.0.1"
+  resolved "https://codeload.github.com/Uniswap/v4-periphery/tar.gz/9628c36b4f5083d19606e63224e4041fe748edae"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"

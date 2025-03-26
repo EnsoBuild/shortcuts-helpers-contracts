@@ -1682,8 +1682,24 @@
           ]
         },
         "UniswapV4Helpers": {
-          "address": "0x19d61187B8d011e035195A6d15298D68b6D5a250",
+          "address": "0xD7707D4433fd2E36cf27559b9e467455Eb09B567",
           "abi": [
+            {
+              "inputs": [
+                {
+                  "internalType": "address",
+                  "name": "_poolManager",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "nonpayable",
+              "type": "constructor"
+            },
+            {
+              "inputs": [],
+              "name": "ValueExceedsUint160Range",
+              "type": "error"
+            },
             {
               "inputs": [
                 {
@@ -1722,14 +1738,14 @@
                   "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -1781,14 +1797,14 @@
                   "type": "int24"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -1804,7 +1820,7 @@
                   "type": "bytes"
                 }
               ],
-              "stateMutability": "pure",
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -1840,14 +1856,14 @@
                   "type": "int24"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -1868,7 +1884,7 @@
                   "type": "bytes"
                 }
               ],
-              "stateMutability": "pure",
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -1909,14 +1925,14 @@
                   "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -1938,6 +1954,72 @@
                 }
               ],
               "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "components": [
+                    {
+                      "internalType": "Currency",
+                      "name": "currency0",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "Currency",
+                      "name": "currency1",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "uint24",
+                      "name": "fee",
+                      "type": "uint24"
+                    },
+                    {
+                      "internalType": "int24",
+                      "name": "tickSpacing",
+                      "type": "int24"
+                    },
+                    {
+                      "internalType": "contract IHooks",
+                      "name": "hooks",
+                      "type": "address"
+                    }
+                  ],
+                  "internalType": "struct PoolKey",
+                  "name": "poolKey",
+                  "type": "tuple"
+                },
+                {
+                  "internalType": "int24",
+                  "name": "tickLower",
+                  "type": "int24"
+                },
+                {
+                  "internalType": "int24",
+                  "name": "tickUpper",
+                  "type": "int24"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount0",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount1",
+                  "type": "uint256"
+                }
+              ],
+              "name": "getLiquidityForAmounts",
+              "outputs": [
+                {
+                  "internalType": "uint128",
+                  "name": "",
+                  "type": "uint128"
+                }
+              ],
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -1973,12 +2055,12 @@
                 {
                   "components": [
                     {
-                      "internalType": "address",
+                      "internalType": "Currency",
                       "name": "currency0",
                       "type": "address"
                     },
                     {
-                      "internalType": "address",
+                      "internalType": "Currency",
                       "name": "currency1",
                       "type": "address"
                     },
@@ -1993,14 +2075,65 @@
                       "type": "int24"
                     },
                     {
-                      "internalType": "address",
+                      "internalType": "contract IHooks",
                       "name": "hooks",
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct UniswapV4Helpers.PoolKey",
+                  "internalType": "struct PoolKey",
                   "name": "",
                   "type": "tuple"
+                }
+              ],
+              "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [],
+              "name": "poolManager",
+              "outputs": [
+                {
+                  "internalType": "contract IPoolManager",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "input",
+                  "type": "uint256"
+                }
+              ],
+              "name": "uint256ToUint128",
+              "outputs": [
+                {
+                  "internalType": "uint128",
+                  "name": "",
+                  "type": "uint128"
+                }
+              ],
+              "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "input",
+                  "type": "uint256"
+                }
+              ],
+              "name": "uint256ToUint160",
+              "outputs": [
+                {
+                  "internalType": "uint160",
+                  "name": "",
+                  "type": "uint160"
                 }
               ],
               "stateMutability": "pure",
@@ -4793,8 +4926,24 @@
           ]
         },
         "UniswapV4Helpers": {
-          "address": "0x19d61187B8d011e035195A6d15298D68b6D5a250",
+          "address": "0x3c34B7e17721cE9Dd943E0708042ED463270b01C",
           "abi": [
+            {
+              "inputs": [
+                {
+                  "internalType": "address",
+                  "name": "_poolManager",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "nonpayable",
+              "type": "constructor"
+            },
+            {
+              "inputs": [],
+              "name": "ValueExceedsUint160Range",
+              "type": "error"
+            },
             {
               "inputs": [
                 {
@@ -4833,14 +4982,14 @@
                   "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -4892,14 +5041,14 @@
                   "type": "int24"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -4915,7 +5064,7 @@
                   "type": "bytes"
                 }
               ],
-              "stateMutability": "pure",
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -4951,14 +5100,14 @@
                   "type": "int24"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -4979,7 +5128,7 @@
                   "type": "bytes"
                 }
               ],
-              "stateMutability": "pure",
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -5020,14 +5169,14 @@
                   "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -5049,6 +5198,72 @@
                 }
               ],
               "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "components": [
+                    {
+                      "internalType": "Currency",
+                      "name": "currency0",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "Currency",
+                      "name": "currency1",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "uint24",
+                      "name": "fee",
+                      "type": "uint24"
+                    },
+                    {
+                      "internalType": "int24",
+                      "name": "tickSpacing",
+                      "type": "int24"
+                    },
+                    {
+                      "internalType": "contract IHooks",
+                      "name": "hooks",
+                      "type": "address"
+                    }
+                  ],
+                  "internalType": "struct PoolKey",
+                  "name": "poolKey",
+                  "type": "tuple"
+                },
+                {
+                  "internalType": "int24",
+                  "name": "tickLower",
+                  "type": "int24"
+                },
+                {
+                  "internalType": "int24",
+                  "name": "tickUpper",
+                  "type": "int24"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount0",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount1",
+                  "type": "uint256"
+                }
+              ],
+              "name": "getLiquidityForAmounts",
+              "outputs": [
+                {
+                  "internalType": "uint128",
+                  "name": "",
+                  "type": "uint128"
+                }
+              ],
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -5084,12 +5299,12 @@
                 {
                   "components": [
                     {
-                      "internalType": "address",
+                      "internalType": "Currency",
                       "name": "currency0",
                       "type": "address"
                     },
                     {
-                      "internalType": "address",
+                      "internalType": "Currency",
                       "name": "currency1",
                       "type": "address"
                     },
@@ -5104,14 +5319,65 @@
                       "type": "int24"
                     },
                     {
-                      "internalType": "address",
+                      "internalType": "contract IHooks",
                       "name": "hooks",
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct UniswapV4Helpers.PoolKey",
+                  "internalType": "struct PoolKey",
                   "name": "",
                   "type": "tuple"
+                }
+              ],
+              "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [],
+              "name": "poolManager",
+              "outputs": [
+                {
+                  "internalType": "contract IPoolManager",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "input",
+                  "type": "uint256"
+                }
+              ],
+              "name": "uint256ToUint128",
+              "outputs": [
+                {
+                  "internalType": "uint128",
+                  "name": "",
+                  "type": "uint128"
+                }
+              ],
+              "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "input",
+                  "type": "uint256"
+                }
+              ],
+              "name": "uint256ToUint160",
+              "outputs": [
+                {
+                  "internalType": "uint160",
+                  "name": "",
+                  "type": "uint160"
                 }
               ],
               "stateMutability": "pure",
@@ -6554,8 +6820,24 @@
           ]
         },
         "UniswapV4Helpers": {
-          "address": "0x19d61187B8d011e035195A6d15298D68b6D5a250",
+          "address": "0xAd4b2F83DFd1aC6a3EBd758E908d9d610A74cc0c",
           "abi": [
+            {
+              "inputs": [
+                {
+                  "internalType": "address",
+                  "name": "_poolManager",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "nonpayable",
+              "type": "constructor"
+            },
+            {
+              "inputs": [],
+              "name": "ValueExceedsUint160Range",
+              "type": "error"
+            },
             {
               "inputs": [
                 {
@@ -6594,14 +6876,14 @@
                   "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -6653,14 +6935,14 @@
                   "type": "int24"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -6676,7 +6958,7 @@
                   "type": "bytes"
                 }
               ],
-              "stateMutability": "pure",
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -6712,14 +6994,14 @@
                   "type": "int24"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -6740,7 +7022,7 @@
                   "type": "bytes"
                 }
               ],
-              "stateMutability": "pure",
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -6781,14 +7063,14 @@
                   "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -6810,6 +7092,72 @@
                 }
               ],
               "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "components": [
+                    {
+                      "internalType": "Currency",
+                      "name": "currency0",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "Currency",
+                      "name": "currency1",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "uint24",
+                      "name": "fee",
+                      "type": "uint24"
+                    },
+                    {
+                      "internalType": "int24",
+                      "name": "tickSpacing",
+                      "type": "int24"
+                    },
+                    {
+                      "internalType": "contract IHooks",
+                      "name": "hooks",
+                      "type": "address"
+                    }
+                  ],
+                  "internalType": "struct PoolKey",
+                  "name": "poolKey",
+                  "type": "tuple"
+                },
+                {
+                  "internalType": "int24",
+                  "name": "tickLower",
+                  "type": "int24"
+                },
+                {
+                  "internalType": "int24",
+                  "name": "tickUpper",
+                  "type": "int24"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount0",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount1",
+                  "type": "uint256"
+                }
+              ],
+              "name": "getLiquidityForAmounts",
+              "outputs": [
+                {
+                  "internalType": "uint128",
+                  "name": "",
+                  "type": "uint128"
+                }
+              ],
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -6845,12 +7193,12 @@
                 {
                   "components": [
                     {
-                      "internalType": "address",
+                      "internalType": "Currency",
                       "name": "currency0",
                       "type": "address"
                     },
                     {
-                      "internalType": "address",
+                      "internalType": "Currency",
                       "name": "currency1",
                       "type": "address"
                     },
@@ -6865,14 +7213,65 @@
                       "type": "int24"
                     },
                     {
-                      "internalType": "address",
+                      "internalType": "contract IHooks",
                       "name": "hooks",
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct UniswapV4Helpers.PoolKey",
+                  "internalType": "struct PoolKey",
                   "name": "",
                   "type": "tuple"
+                }
+              ],
+              "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [],
+              "name": "poolManager",
+              "outputs": [
+                {
+                  "internalType": "contract IPoolManager",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "input",
+                  "type": "uint256"
+                }
+              ],
+              "name": "uint256ToUint128",
+              "outputs": [
+                {
+                  "internalType": "uint128",
+                  "name": "",
+                  "type": "uint128"
+                }
+              ],
+              "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "input",
+                  "type": "uint256"
+                }
+              ],
+              "name": "uint256ToUint160",
+              "outputs": [
+                {
+                  "internalType": "uint160",
+                  "name": "",
+                  "type": "uint160"
                 }
               ],
               "stateMutability": "pure",
@@ -9665,8 +10064,24 @@
           ]
         },
         "UniswapV4Helpers": {
-          "address": "0x19d61187B8d011e035195A6d15298D68b6D5a250",
+          "address": "0x84Bf8347a757AFc10892AbA89dfb81E6EA999985",
           "abi": [
+            {
+              "inputs": [
+                {
+                  "internalType": "address",
+                  "name": "_poolManager",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "nonpayable",
+              "type": "constructor"
+            },
+            {
+              "inputs": [],
+              "name": "ValueExceedsUint160Range",
+              "type": "error"
+            },
             {
               "inputs": [
                 {
@@ -9705,14 +10120,14 @@
                   "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -9764,14 +10179,14 @@
                   "type": "int24"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -9787,7 +10202,7 @@
                   "type": "bytes"
                 }
               ],
-              "stateMutability": "pure",
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -9823,14 +10238,14 @@
                   "type": "int24"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -9851,7 +10266,7 @@
                   "type": "bytes"
                 }
               ],
-              "stateMutability": "pure",
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -9892,14 +10307,14 @@
                   "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -9921,6 +10336,72 @@
                 }
               ],
               "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "components": [
+                    {
+                      "internalType": "Currency",
+                      "name": "currency0",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "Currency",
+                      "name": "currency1",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "uint24",
+                      "name": "fee",
+                      "type": "uint24"
+                    },
+                    {
+                      "internalType": "int24",
+                      "name": "tickSpacing",
+                      "type": "int24"
+                    },
+                    {
+                      "internalType": "contract IHooks",
+                      "name": "hooks",
+                      "type": "address"
+                    }
+                  ],
+                  "internalType": "struct PoolKey",
+                  "name": "poolKey",
+                  "type": "tuple"
+                },
+                {
+                  "internalType": "int24",
+                  "name": "tickLower",
+                  "type": "int24"
+                },
+                {
+                  "internalType": "int24",
+                  "name": "tickUpper",
+                  "type": "int24"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount0",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount1",
+                  "type": "uint256"
+                }
+              ],
+              "name": "getLiquidityForAmounts",
+              "outputs": [
+                {
+                  "internalType": "uint128",
+                  "name": "",
+                  "type": "uint128"
+                }
+              ],
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -9956,12 +10437,12 @@
                 {
                   "components": [
                     {
-                      "internalType": "address",
+                      "internalType": "Currency",
                       "name": "currency0",
                       "type": "address"
                     },
                     {
-                      "internalType": "address",
+                      "internalType": "Currency",
                       "name": "currency1",
                       "type": "address"
                     },
@@ -9976,14 +10457,65 @@
                       "type": "int24"
                     },
                     {
-                      "internalType": "address",
+                      "internalType": "contract IHooks",
                       "name": "hooks",
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct UniswapV4Helpers.PoolKey",
+                  "internalType": "struct PoolKey",
                   "name": "",
                   "type": "tuple"
+                }
+              ],
+              "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [],
+              "name": "poolManager",
+              "outputs": [
+                {
+                  "internalType": "contract IPoolManager",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "input",
+                  "type": "uint256"
+                }
+              ],
+              "name": "uint256ToUint128",
+              "outputs": [
+                {
+                  "internalType": "uint128",
+                  "name": "",
+                  "type": "uint128"
+                }
+              ],
+              "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "input",
+                  "type": "uint256"
+                }
+              ],
+              "name": "uint256ToUint160",
+              "outputs": [
+                {
+                  "internalType": "uint160",
+                  "name": "",
+                  "type": "uint160"
                 }
               ],
               "stateMutability": "pure",
@@ -14100,8 +14632,24 @@
           ]
         },
         "UniswapV4Helpers": {
-          "address": "0x19d61187B8d011e035195A6d15298D68b6D5a250",
+          "address": "0xfBDC5136305F68b306D0A5acF0A9E96F30b73760",
           "abi": [
+            {
+              "inputs": [
+                {
+                  "internalType": "address",
+                  "name": "_poolManager",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "nonpayable",
+              "type": "constructor"
+            },
+            {
+              "inputs": [],
+              "name": "ValueExceedsUint160Range",
+              "type": "error"
+            },
             {
               "inputs": [
                 {
@@ -14140,14 +14688,14 @@
                   "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -14199,14 +14747,14 @@
                   "type": "int24"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -14222,7 +14770,7 @@
                   "type": "bytes"
                 }
               ],
-              "stateMutability": "pure",
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -14258,14 +14806,14 @@
                   "type": "int24"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -14286,7 +14834,7 @@
                   "type": "bytes"
                 }
               ],
-              "stateMutability": "pure",
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -14327,14 +14875,14 @@
                   "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -14356,6 +14904,72 @@
                 }
               ],
               "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "components": [
+                    {
+                      "internalType": "Currency",
+                      "name": "currency0",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "Currency",
+                      "name": "currency1",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "uint24",
+                      "name": "fee",
+                      "type": "uint24"
+                    },
+                    {
+                      "internalType": "int24",
+                      "name": "tickSpacing",
+                      "type": "int24"
+                    },
+                    {
+                      "internalType": "contract IHooks",
+                      "name": "hooks",
+                      "type": "address"
+                    }
+                  ],
+                  "internalType": "struct PoolKey",
+                  "name": "poolKey",
+                  "type": "tuple"
+                },
+                {
+                  "internalType": "int24",
+                  "name": "tickLower",
+                  "type": "int24"
+                },
+                {
+                  "internalType": "int24",
+                  "name": "tickUpper",
+                  "type": "int24"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount0",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount1",
+                  "type": "uint256"
+                }
+              ],
+              "name": "getLiquidityForAmounts",
+              "outputs": [
+                {
+                  "internalType": "uint128",
+                  "name": "",
+                  "type": "uint128"
+                }
+              ],
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -14391,12 +15005,12 @@
                 {
                   "components": [
                     {
-                      "internalType": "address",
+                      "internalType": "Currency",
                       "name": "currency0",
                       "type": "address"
                     },
                     {
-                      "internalType": "address",
+                      "internalType": "Currency",
                       "name": "currency1",
                       "type": "address"
                     },
@@ -14411,14 +15025,65 @@
                       "type": "int24"
                     },
                     {
-                      "internalType": "address",
+                      "internalType": "contract IHooks",
                       "name": "hooks",
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct UniswapV4Helpers.PoolKey",
+                  "internalType": "struct PoolKey",
                   "name": "",
                   "type": "tuple"
+                }
+              ],
+              "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [],
+              "name": "poolManager",
+              "outputs": [
+                {
+                  "internalType": "contract IPoolManager",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "input",
+                  "type": "uint256"
+                }
+              ],
+              "name": "uint256ToUint128",
+              "outputs": [
+                {
+                  "internalType": "uint128",
+                  "name": "",
+                  "type": "uint128"
+                }
+              ],
+              "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "input",
+                  "type": "uint256"
+                }
+              ],
+              "name": "uint256ToUint160",
+              "outputs": [
+                {
+                  "internalType": "uint160",
+                  "name": "",
+                  "type": "uint160"
                 }
               ],
               "stateMutability": "pure",
@@ -15826,8 +16491,24 @@
           ]
         },
         "UniswapV4Helpers": {
-          "address": "0x19d61187B8d011e035195A6d15298D68b6D5a250",
+          "address": "0x7194bb50f367F75bFf2a877E37F2c51EfaF736e1",
           "abi": [
+            {
+              "inputs": [
+                {
+                  "internalType": "address",
+                  "name": "_poolManager",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "nonpayable",
+              "type": "constructor"
+            },
+            {
+              "inputs": [],
+              "name": "ValueExceedsUint160Range",
+              "type": "error"
+            },
             {
               "inputs": [
                 {
@@ -15866,14 +16547,14 @@
                   "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -15925,14 +16606,14 @@
                   "type": "int24"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -15948,7 +16629,7 @@
                   "type": "bytes"
                 }
               ],
-              "stateMutability": "pure",
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -15984,14 +16665,14 @@
                   "type": "int24"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -16012,7 +16693,7 @@
                   "type": "bytes"
                 }
               ],
-              "stateMutability": "pure",
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -16053,14 +16734,14 @@
                   "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount0Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
-                  "internalType": "uint128",
+                  "internalType": "uint256",
                   "name": "amount1Max",
-                  "type": "uint128"
+                  "type": "uint256"
                 },
                 {
                   "internalType": "address",
@@ -16082,6 +16763,72 @@
                 }
               ],
               "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "components": [
+                    {
+                      "internalType": "Currency",
+                      "name": "currency0",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "Currency",
+                      "name": "currency1",
+                      "type": "address"
+                    },
+                    {
+                      "internalType": "uint24",
+                      "name": "fee",
+                      "type": "uint24"
+                    },
+                    {
+                      "internalType": "int24",
+                      "name": "tickSpacing",
+                      "type": "int24"
+                    },
+                    {
+                      "internalType": "contract IHooks",
+                      "name": "hooks",
+                      "type": "address"
+                    }
+                  ],
+                  "internalType": "struct PoolKey",
+                  "name": "poolKey",
+                  "type": "tuple"
+                },
+                {
+                  "internalType": "int24",
+                  "name": "tickLower",
+                  "type": "int24"
+                },
+                {
+                  "internalType": "int24",
+                  "name": "tickUpper",
+                  "type": "int24"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount0",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "amount1",
+                  "type": "uint256"
+                }
+              ],
+              "name": "getLiquidityForAmounts",
+              "outputs": [
+                {
+                  "internalType": "uint128",
+                  "name": "",
+                  "type": "uint128"
+                }
+              ],
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -16117,12 +16864,12 @@
                 {
                   "components": [
                     {
-                      "internalType": "address",
+                      "internalType": "Currency",
                       "name": "currency0",
                       "type": "address"
                     },
                     {
-                      "internalType": "address",
+                      "internalType": "Currency",
                       "name": "currency1",
                       "type": "address"
                     },
@@ -16137,14 +16884,65 @@
                       "type": "int24"
                     },
                     {
-                      "internalType": "address",
+                      "internalType": "contract IHooks",
                       "name": "hooks",
                       "type": "address"
                     }
                   ],
-                  "internalType": "struct UniswapV4Helpers.PoolKey",
+                  "internalType": "struct PoolKey",
                   "name": "",
                   "type": "tuple"
+                }
+              ],
+              "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [],
+              "name": "poolManager",
+              "outputs": [
+                {
+                  "internalType": "contract IPoolManager",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "input",
+                  "type": "uint256"
+                }
+              ],
+              "name": "uint256ToUint128",
+              "outputs": [
+                {
+                  "internalType": "uint128",
+                  "name": "",
+                  "type": "uint128"
+                }
+              ],
+              "stateMutability": "pure",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "input",
+                  "type": "uint256"
+                }
+              ],
+              "name": "uint256ToUint160",
+              "outputs": [
+                {
+                  "internalType": "uint160",
+                  "name": "",
+                  "type": "uint160"
                 }
               ],
               "stateMutability": "pure",
