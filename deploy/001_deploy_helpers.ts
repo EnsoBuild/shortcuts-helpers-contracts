@@ -88,6 +88,16 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   await deployERC20Helpers();
 
+  const {deploy: deployBalancerHelpers} = await deterministic('BalancerHelpers', {
+    from: deployer,
+    args: [],
+    log: true,
+    autoMine: true,
+    skipIfAlreadyDeployed: true,
+  });
+
+  await deployBalancerHelpers();
+
   /*
   if (network.name === 'mainnet') {
     const {deploy: deploySommelierHelpers} = await deterministic('SommelierHelpers', {
