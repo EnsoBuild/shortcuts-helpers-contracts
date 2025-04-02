@@ -13,20 +13,20 @@ import {nodeUrl, accounts, addForkConfiguration, nodeHeaders} from './utils/netw
 dotenv.config();
 
 const oldCompiler = {
-  version: "0.8.16",
+  version: '0.8.16',
   settings: {
     optimizer: {
       enabled: true,
       runs: 100000000,
     },
-  }
-}
+  },
+};
 
 const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
-        version: '0.8.23',
+        version: '0.8.24',
         settings: {
           optimizer: {
             enabled: true,
@@ -37,14 +37,14 @@ const config: HardhatUserConfig = {
       oldCompiler,
     ],
     overrides: {
-      "contracts/BalancerHelpers.sol": oldCompiler,
-      "contracts/DecimalHelpers.sol": oldCompiler,
-      "contracts/EnsoShortcutsHelpers.sol": oldCompiler,
-      "contracts/MathHelpers.sol": oldCompiler,
-      "contracts/PercentageMathHelpers.sol": oldCompiler,
-      "contracts/SignedMathHelpers.sol": oldCompiler,
-      "contracts/TupleHelpers.sol": oldCompiler
-    }
+      'contracts/BalancerHelpers.sol': oldCompiler,
+      'contracts/DecimalHelpers.sol': oldCompiler,
+      'contracts/EnsoShortcutsHelpers.sol': oldCompiler,
+      'contracts/MathHelpers.sol': oldCompiler,
+      'contracts/PercentageMathHelpers.sol': oldCompiler,
+      'contracts/SignedMathHelpers.sol': oldCompiler,
+      'contracts/TupleHelpers.sol': oldCompiler,
+    },
   },
   namedAccounts: {
     deployer: 0,
@@ -123,7 +123,7 @@ const config: HardhatUserConfig = {
       url: nodeUrl('berachain'),
       accounts: accounts('berachain'),
       saveDeployments: true,
-      httpHeaders: nodeHeaders('berachain')
+      httpHeaders: nodeHeaders('berachain'),
     },
     sonic: {
       url: nodeUrl('sonic'),
@@ -134,7 +134,7 @@ const config: HardhatUserConfig = {
       url: nodeUrl('hyper'),
       accounts: accounts('hyper'),
       saveDeployments: true,
-    }
+    },
   }),
   paths: {
     sources: 'contracts',

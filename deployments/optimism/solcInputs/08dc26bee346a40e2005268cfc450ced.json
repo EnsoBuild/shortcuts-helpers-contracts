@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/UniswapV4Helpers.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.16;\n\ncontract UniswapV4Helpers {\n    uint256 internal constant MINT_POSITION = 0x02;\n    uint256 internal constant MINT_POSITION_FROM_DELTAS = 0x05;\n    uint256 internal constant SETTLE_PAIR = 0x0d;\n\n    struct PoolKey {\n        address currency0;\n        address currency1;\n        uint24 fee;\n        int24 tickSpacing;\n        address hooks;\n    }\n\n    function getPoolKey(\n        address currency0,\n        address currency1,\n        uint24 fee,\n        int24 tickSpacing,\n        address hooks\n    ) public pure returns (PoolKey memory) {\n        return PoolKey({currency0: currency0, currency1: currency1, fee: fee, tickSpacing: tickSpacing, hooks: hooks});\n    }\n\n    function encodeMintWithHooks(\n        address currency0,\n        address currency1,\n        uint24 fee,\n        int24 tickSpacing,\n        int24 tickLower,\n        int24 tickUpper,\n        uint256 liquidity,\n        uint128 amount0Max,\n        uint128 amount1Max,\n        address recipient,\n        address hooks\n    ) public pure returns (bytes memory) {\n        bytes memory actions = abi.encodePacked(uint8(MINT_POSITION), uint8(SETTLE_PAIR));\n\n        bytes[] memory params = new bytes[](2);\n\n        {\n            params[0] = abi.encode(\n                getPoolKey(currency0, currency1, fee, tickSpacing, hooks),\n                tickLower,\n                tickUpper,\n                liquidity,\n                amount0Max,\n                amount1Max,\n                recipient,\n                bytes(\"\")\n            );\n        }\n        params[1] = abi.encode(currency0, currency1);\n\n        return abi.encode(actions, params);\n    }\n\n    function encodeMint(\n        address currency0,\n        address currency1,\n        uint24 fee,\n        int24 tickSpacing,\n        int24 tickLower,\n        int24 tickUpper,\n        uint256 liquidity,\n        uint128 amount0Max,\n        uint128 amount1Max,\n        address recipient\n    ) external pure returns (bytes memory) {\n        return\n            encodeMintWithHooks(\n                currency0,\n                currency1,\n                fee,\n                tickSpacing,\n                tickLower,\n                tickUpper,\n                liquidity,\n                amount0Max,\n                amount1Max,\n                recipient,\n                address(0)\n            );\n    }\n\n    function encodeMintFromDeltasWithHooks(\n        address currency0,\n        address currency1,\n        uint24 fee,\n        int24 tickSpacing,\n        int24 tickLower,\n        int24 tickUpper,\n        uint128 amount0Max,\n        uint128 amount1Max,\n        address recipient,\n        address hooks\n    ) public pure returns (bytes memory) {\n        bytes memory actions = abi.encodePacked(uint8(MINT_POSITION_FROM_DELTAS), uint8(SETTLE_PAIR));\n        bytes[] memory params = new bytes[](2);\n\n        params[0] = abi.encode(\n            getPoolKey(currency0, currency1, fee, tickSpacing, hooks),\n            tickLower,\n            tickUpper,\n            amount0Max,\n            amount1Max,\n            recipient,\n            bytes(\"\")\n        );\n        params[1] = abi.encode(currency0, currency1);\n\n        return abi.encode(actions, params);\n    }\n\n    function encodeMintFromDeltas(\n        address currency0,\n        address currency1,\n        uint24 fee,\n        int24 tickSpacing,\n        int24 tickLower,\n        int24 tickUpper,\n        uint128 amount0Max,\n        uint128 amount1Max,\n        address recipient\n    ) external pure returns (bytes memory) {\n        return\n            encodeMintFromDeltasWithHooks(\n                currency0,\n                currency1,\n                fee,\n                tickSpacing,\n                tickLower,\n                tickUpper,\n                amount0Max,\n                amount1Max,\n                recipient,\n                address(0)\n            );\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 100000000
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/UniswapV4Helpers.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.16;\n\ncontract UniswapV4Helpers {\n    uint256 internal constant DECREASE_LIQUIDITY = 0x01;\n    uint256 internal constant MINT_POSITION = 0x02;\n    uint256 internal constant BURN_POSITION = 0x03;\n    uint256 internal constant INCREASE_LIQUIDITY_FROM_DELTAS = 0x04;\n    uint256 internal constant MINT_POSITION_FROM_DELTAS = 0x05;\n    uint256 internal constant SETTLE_PAIR = 0x0d;\n\n    struct PoolKey {\n        address currency0;\n        address currency1;\n        uint24 fee;\n        int24 tickSpacing;\n        address hooks;\n    }\n\n    function encodeMint(\n        address currency0,\n        address currency1,\n        uint24 fee,\n        int24 tickSpacing,\n        int24 tickLower,\n        int24 tickUpper,\n        uint256 liquidity,\n        uint128 amount0Max,\n        uint128 amount1Max,\n        address recipient\n    ) external pure returns (bytes memory) {\n        bytes memory actions = abi.encodePacked(MINT_POSITION, SETTLE_PAIR);\n\n        bytes[] memory params = new bytes[](2);\n\n        PoolKey memory poolKey = PoolKey({\n            currency0: currency0,\n            currency1: currency1,\n            fee: fee,\n            tickSpacing: tickSpacing,\n            hooks: address(0)\n        });\n        params[0] = abi.encode(poolKey, tickLower, tickUpper, liquidity, amount0Max, amount1Max, recipient, bytes(\"\"));\n        params[1] = abi.encode(currency0, currency1);\n\n        return abi.encode(actions, params);\n    }\n\n    function encodeMintFromDeltas(\n        address currency0,\n        address currency1,\n        uint24 fee,\n        int24 tickSpacing,\n        int24 tickLower,\n        int24 tickUpper,\n        uint128 amount0Max,\n        uint128 amount1Max,\n        address recipient\n    ) external pure returns (bytes memory) {\n        bytes memory actions = abi.encodePacked(MINT_POSITION_FROM_DELTAS, SETTLE_PAIR);\n        bytes[] memory params = new bytes[](2);\n\n        PoolKey memory poolKey = PoolKey({\n            currency0: currency0,\n            currency1: currency1,\n            fee: fee,\n            tickSpacing: tickSpacing,\n            hooks: address(0)\n        });\n        params[0] = abi.encode(poolKey, tickLower, tickUpper, amount0Max, amount1Max, recipient, bytes(\"\"));\n        params[1] = abi.encode(currency0, currency1);\n\n        return abi.encode(actions, params);\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 100000000
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

@@ -71,6 +71,8 @@
   "dependencies": {
     "@openzeppelin/contracts": "^5.0.0",
     "@typechain/ethers-v5": "^10.0.0",
+    "@uniswap/v4-core": "github:uniswap/v4-core",
+    "@uniswap/v4-periphery": "github:Uniswap/v4-periphery",
     "typechain": "^8.0.0"
   },
   "main": "dist/index",
